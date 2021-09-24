@@ -162,6 +162,26 @@ describe('NavStore', () => {
 		expect(NavStore.getState()).toMatchSnapshot()
 	})
 
+	test('nav:setRedAlert event fires and updates state', () => {
+		const redAlert = false
+		NavStore.setState({
+			redAlert
+		})
+		// simulate trigger
+		Dispatcher.trigger.mockReturnValueOnce()
+
+		// go
+		eventCallbacks['nav:setRedAlert']({ value: { redAlert: !redAlert } })
+		expect(Dispatcher.trigger).toHaveBeenCalledTimes(1)
+		expect(Dispatcher.trigger.mock.calls[0]).toMatchSnapshot()
+		expect(ViewerAPI.postEvent).toHaveBeenCalledTimes(1)
+		expect(ViewerAPI.postEvent.mock.calls[0]).toMatchSnapshot()
+		const payloadToAPI = ViewerAPI.postEvent.mock.calls[0][0].payload
+		expect(payloadToAPI).toEqual({ from: redAlert, to: !redAlert })
+		expect(NavStore.getState()).toMatchSnapshot()
+	})
+
+
 	test('nav:prev changes page and posts event', () => {
 		NavStore.setState({
 			isInitialized: true,

@@ -407,7 +407,7 @@ describe('Dashboard', () => {
 	})
 
 	test('"Delete All" button calls functions appropriately', async () => {
-		dashboardProps.bulkDeleteModules = jest.fn(() => Promise.resolve())
+		dashboardProps.bulkDeleteModules = jest.fn()
 		dashboardProps.selectedModules = ['mockId', 'mockId2']
 		dashboardProps.multiSelectMode = true
 		const reusableComponent = <Dashboard {...dashboardProps} />
@@ -564,8 +564,6 @@ describe('Dashboard', () => {
 		dashboardProps.showModuleManageCollections = jest.fn()
 		dashboardProps.showModulePermissions = jest.fn()
 		dashboardProps.deleteModule = jest.fn()
-		dashboardProps.startLoadingAnimation = jest.fn()
-		dashboardProps.stopLoadingAnimation = jest.fn()
 		dashboardProps.dialog = 'module-more'
 		const component = create(<Dashboard key="dashboardComponent" {...dashboardProps} />)
 
@@ -577,12 +575,6 @@ describe('Dashboard', () => {
 		// draftId for the menu's module would normally be passed here
 		dialogComponent.props.deleteModule('mockDraftId')
 		expectMethodToBeCalledOnceWith(dashboardProps.deleteModule, ['mockDraftId'])
-
-		act(() => {
-			dialogComponent.props.startLoadingAnimation()
-			dialogComponent.props.stopLoadingAnimation()
-		})
-
 		dialogComponent.props.onClose()
 		expectMethodToBeCalledOnceWith(dashboardProps.closeModal)
 

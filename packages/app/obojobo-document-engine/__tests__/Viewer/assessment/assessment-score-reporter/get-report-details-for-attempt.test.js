@@ -1,8 +1,11 @@
-import getReportDetailsForAttempt from './get-report-details-for-attempt'
+import getReportDetailsForAttempt from '../../../../src/scripts/viewer/assessment/assessment-score-reporter/get-report-details-for-attempt.js'
 
-jest.mock('./get-status-result', () => {
-	return () => 'mocked-status-result'
-})
+jest.mock(
+	'../../../../src/scripts/viewer/assessment/assessment-score-reporter/get-status-result.js',
+	() => {
+		return () => 'mocked-status-result'
+	}
+)
 
 describe('getReportDetailsForAttempt', () => {
 	test('returns expected data structure', () => {

@@ -1,4 +1,4 @@
-import getReportDisplayValuesForAttempt from './get-report-display-values-for-attempt'
+import getReportDisplayValuesForAttempt from '../../../../src/scripts/viewer/assessment/assessment-score-reporter/get-report-display-values-for-attempt.js'
 
 describe('getReportDisplayValuesForAttempt', () => {
 	test('returns expected data structure', () => {

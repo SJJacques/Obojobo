@@ -21,7 +21,7 @@ oboEvents.on(DraftModel.EVENT_NEW_DRAFT_CREATED, newDraft => {
 })
 
 // when a draft is deleted, remove all of it's permissions
-oboEvents.on(DraftModel.EVENT_DRAFT_DELETED, draft => {
+oboEvents.on(DraftModel.EVENT_DRAFT_DELETED, () => {
 	// remove all permissions for all deleted drafts
 	return db
 		.none(
@@ -33,7 +33,6 @@ oboEvents.on(DraftModel.EVENT_DRAFT_DELETED, draft => {
 			AND
 			drafts.deleted = TRUE`
 		)
-		.then(logger.info(`User ${draft.userId} deleted module ${draft.id}`))
 		.catch(logger.error)
 })
 

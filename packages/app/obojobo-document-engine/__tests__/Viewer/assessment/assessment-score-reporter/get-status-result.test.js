@@ -1,4 +1,4 @@
-import getStatusResult from './get-status-result'
+import getStatusResult from '../../../../src/scripts/viewer/assessment/assessment-score-reporter/get-status-result.js'
 
 describe('getStatusResult', () => {
 	test('passed default is 100', () => {

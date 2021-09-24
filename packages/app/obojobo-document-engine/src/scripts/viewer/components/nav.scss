@@ -4,6 +4,7 @@
 	$color-nav-bg: #fbfbfb;
 	$color-nav-highlight: $color-obojobo-blue;
 	$color-nav-hover: darken($color-highlight, 25%);
+	$color-nav-bg-red-alert: #ff0000;
 	$padding: 2rem;
 
 	position: fixed;
@@ -23,6 +24,10 @@
 	border-right: 1px solid transparentize($color-shadow, 0.1);
 	overflow-y: auto;
 	word-wrap: break-word;
+
+	&.is-red-alert {
+		background-color: $color-nav-bg-red-alert;
+	}
 
 	&:focus {
 		outline: none;
@@ -197,6 +202,7 @@
 				background: $color-nav-bg;
 			}
 		}
+
 
 		&::after {
 			top: 0;

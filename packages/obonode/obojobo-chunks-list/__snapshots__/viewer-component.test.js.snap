@@ -18,35 +18,17 @@ exports[`List List component 1`] = `
         start={1}
         style={
           Object {
-            "color": "#000",
             "listStyleType": undefined,
           }
         }
       >
-        <span
+        <li
           style={
             Object {
-              "color": "black",
+              "listStyleType": "none",
             }
           }
-        >
-          <li
-            style={
-              Object {
-                "color": "#000",
-                "listStyleType": "none",
-              }
-            }
-          >
-            <span
-              style={
-                Object {
-                  "color": "black",
-                }
-              }
-            />
-          </li>
-        </span>
+        />
       </ol>
     </div>
   </div>
@@ -71,115 +53,148 @@ exports[`List List component with ascending indents 1`] = `
         start={1}
         style={
           Object {
-            "color": "#000",
             "listStyleType": undefined,
           }
         }
       >
-        <span
+        <li
           style={
             Object {
-              "color": "black",
+              "listStyleType": "none",
             }
           }
         >
-          <li
+          <ol
+            start={1}
             style={
               Object {
-                "color": "#000",
-                "listStyleType": "none",
+                "listStyleType": undefined,
               }
             }
           >
-            <span
+            <li
               style={
                 Object {
-                  "color": "black",
+                  "listStyleType": "lower-alpha",
                 }
               }
             >
-              <ol
+              <span
+                className="obo-text"
+                data-group-index={0}
+              >
+                <span>
+                  <span>
+                    <span>
+                      One(indent=1)
+                    </span>
+                  </span>
+                </span>
+              </span>
+              <ul
                 start={1}
                 style={
                   Object {
-                    "color": "#000",
                     "listStyleType": undefined,
                   }
                 }
               >
-                <span
+                <li
                   style={
                     Object {
-                      "color": "black",
+                      "listStyleType": "square",
                     }
                   }
                 >
-                  <li
+                  <span
+                    className="obo-text"
+                    data-group-index={1}
+                  >
+                    <span>
+                      <span>
+                        <span>
+                          Two(indent=2)
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                  <ol
+                    start={1}
                     style={
                       Object {
-                        "color": "#000",
-                        "listStyleType": "lower-alpha",
+                        "listStyleType": undefined,
                       }
                     }
                   >
-                    <span
+                    <li
                       style={
                         Object {
-                          "color": "black",
+                          "listStyleType": "upper-alpha",
                         }
                       }
                     >
                       <span
                         className="obo-text"
-                        data-group-index={0}
+                        data-group-index={2}
                       >
                         <span>
                           <span>
                             <span>
-                              One(indent=1)
+                              Three(indent=3)
                             </span>
                           </span>
                         </span>
                       </span>
-                      <ul
-                        start={1}
+                      <ol
+                        start="10"
                         style={
                           Object {
-                            "color": "#000",
                             "listStyleType": undefined,
                           }
                         }
                       >
-                        <span
+                        <li
                           style={
                             Object {
-                              "color": "black",
+                              "listStyleType": "upper-alpha",
                             }
                           }
                         >
-                          <li
+                          <span
+                            className="obo-text"
+                            data-group-index={3}
+                          >
+                            <span>
+                              <span>
+                                <span>
+                                  Four(indent=4)
+                                </span>
+                              </span>
+                            </span>
+                          </span>
+                          <ol
+                            start={1}
                             style={
                               Object {
-                                "color": "#000",
-                                "listStyleType": "square",
+                                "listStyleType": undefined,
                               }
                             }
                           >
-                            <span
+                            <li
                               style={
                                 Object {
-                                  "color": "black",
+                                  "listStyleType": "decimal",
                                 }
                               }
                             >
                               <span
                                 className="obo-text"
-                                data-group-index={1}
+                                data-group-index={4}
                               >
                                 <span>
                                   <span>
                                     <span>
-                                      Two(indent=2)
+                                      Five(indent=5)
                                     </span>
                                   </span>
                                 </span>
@@ -188,201 +203,42 @@ exports[`List List component with ascending indents 1`] = `
                                 start={1}
                                 style={
                                   Object {
-                                    "color": "#000",
                                     "listStyleType": undefined,
                                   }
                                 }
                               >
-                                <span
+                                <li
                                   style={
                                     Object {
-                                      "color": "black",
+                                      "listStyleType": "lower-alpha",
                                     }
                                   }
                                 >
-                                  <li
-                                    style={
-                                      Object {
-                                        "color": "#000",
-                                        "listStyleType": "upper-alpha",
-                                      }
-                                    }
+                                  <span
+                                    className="obo-text"
+                                    data-group-index={5}
                                   >
-                                    <span
-                                      style={
-                                        Object {
-                                          "color": "black",
-                                        }
-                                      }
-                                    >
-                                      <span
-                                        className="obo-text"
-                                        data-group-index={2}
-                                      >
+                                    <span>
+                                      <span>
                                         <span>
-                                          <span>
-                                            <span>
-                                              Three(indent=3)
-                                            </span>
-                                          </span>
+                                          Six(indent=6)
                                         </span>
                                       </span>
-                                      <ol
-                                        start="10"
-                                        style={
-                                          Object {
-                                            "color": "#000",
-                                            "listStyleType": undefined,
-                                          }
-                                        }
-                                      >
-                                        <span
-                                          style={
-                                            Object {
-                                              "color": "black",
-                                            }
-                                          }
-                                        >
-                                          <li
-                                            style={
-                                              Object {
-                                                "color": "#000",
-                                                "listStyleType": "upper-alpha",
-                                              }
-                                            }
-                                          >
-                                            <span
-                                              style={
-                                                Object {
-                                                  "color": "black",
-                                                }
-                                              }
-                                            >
-                                              <span
-                                                className="obo-text"
-                                                data-group-index={3}
-                                              >
-                                                <span>
-                                                  <span>
-                                                    <span>
-                                                      Four(indent=4)
-                                                    </span>
-                                                  </span>
-                                                </span>
-                                              </span>
-                                              <ol
-                                                start={1}
-                                                style={
-                                                  Object {
-                                                    "color": "#000",
-                                                    "listStyleType": undefined,
-                                                  }
-                                                }
-                                              >
-                                                <span
-                                                  style={
-                                                    Object {
-                                                      "color": "black",
-                                                    }
-                                                  }
-                                                >
-                                                  <li
-                                                    style={
-                                                      Object {
-                                                        "color": "#000",
-                                                        "listStyleType": "decimal",
-                                                      }
-                                                    }
-                                                  >
-                                                    <span
-                                                      style={
-                                                        Object {
-                                                          "color": "black",
-                                                        }
-                                                      }
-                                                    >
-                                                      <span
-                                                        className="obo-text"
-                                                        data-group-index={4}
-                                                      >
-                                                        <span>
-                                                          <span>
-                                                            <span>
-                                                              Five(indent=5)
-                                                            </span>
-                                                          </span>
-                                                        </span>
-                                                      </span>
-                                                      <ol
-                                                        start={1}
-                                                        style={
-                                                          Object {
-                                                            "color": "#000",
-                                                            "listStyleType": undefined,
-                                                          }
-                                                        }
-                                                      >
-                                                        <span
-                                                          style={
-                                                            Object {
-                                                              "color": "black",
-                                                            }
-                                                          }
-                                                        >
-                                                          <li
-                                                            style={
-                                                              Object {
-                                                                "color": "#000",
-                                                                "listStyleType": "lower-alpha",
-                                                              }
-                                                            }
-                                                          >
-                                                            <span
-                                                              style={
-                                                                Object {
-                                                                  "color": "black",
-                                                                }
-                                                              }
-                                                            >
-                                                              <span
-                                                                className="obo-text"
-                                                                data-group-index={5}
-                                                              >
-                                                                <span>
-                                                                  <span>
-                                                                    <span>
-                                                                      Six(indent=6)
-                                                                    </span>
-                                                                  </span>
-                                                                </span>
-                                                              </span>
-                                                            </span>
-                                                          </li>
-                                                        </span>
-                                                      </ol>
-                                                    </span>
-                                                  </li>
-                                                </span>
-                                              </ol>
-                                            </span>
-                                          </li>
-                                        </span>
-                                      </ol>
                                     </span>
-                                  </li>
-                                </span>
+                                  </span>
+                                </li>
                               </ol>
-                            </span>
-                          </li>
-                        </span>
-                      </ul>
-                    </span>
-                  </li>
-                </span>
-              </ol>
-            </span>
-          </li>
-        </span>
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </li>
       </ol>
     </div>
   </div>
@@ -407,159 +263,96 @@ exports[`List List component with inverse indentation 1`] = `
         start={1}
         style={
           Object {
-            "color": "#000",
             "listStyleType": undefined,
           }
         }
       >
-        <span
+        <li
           style={
             Object {
-              "color": "black",
+              "listStyleType": "decimal",
             }
           }
         >
-          <li
+          <span
+            className="obo-text"
+            data-group-index={0}
+          >
+            <span>
+              <span>
+                <span>
+                  One(indent=1)
+                </span>
+              </span>
+            </span>
+          </span>
+          <ol
+            start={1}
             style={
               Object {
-                "color": "#000",
-                "listStyleType": "decimal",
+                "listStyleType": undefined,
               }
             }
           >
-            <span
+            <li
               style={
                 Object {
-                  "color": "black",
+                  "listStyleType": "none",
+                }
+              }
+            >
+              <ul
+                start={1}
+                style={
+                  Object {
+                    "listStyleType": undefined,
+                  }
+                }
+              >
+                <li
+                  style={
+                    Object {
+                      "listStyleType": "square",
+                    }
+                  }
+                >
+                  <span
+                    className="obo-text"
+                    data-group-index={1}
+                  >
+                    <span>
+                      <span>
+                        <span>
+                          Two(indent=2)
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li
+              style={
+                Object {
+                  "listStyleType": "lower-alpha",
                 }
               }
             >
               <span
                 className="obo-text"
-                data-group-index={0}
+                data-group-index={2}
               >
                 <span>
                   <span>
                     <span>
-                      One(indent=1)
+                      Three(indent=6)
                     </span>
                   </span>
                 </span>
               </span>
-              <ol
-                start={1}
-                style={
-                  Object {
-                    "color": "#000",
-                    "listStyleType": undefined,
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "color": "black",
-                    }
-                  }
-                >
-                  <li
-                    style={
-                      Object {
-                        "color": "#000",
-                        "listStyleType": "none",
-                      }
-                    }
-                  >
-                    <span
-                      style={
-                        Object {
-                          "color": "black",
-                        }
-                      }
-                    >
-                      <ul
-                        start={1}
-                        style={
-                          Object {
-                            "color": "#000",
-                            "listStyleType": undefined,
-                          }
-                        }
-                      >
-                        <span
-                          style={
-                            Object {
-                              "color": "black",
-                            }
-                          }
-                        >
-                          <li
-                            style={
-                              Object {
-                                "color": "#000",
-                                "listStyleType": "square",
-                              }
-                            }
-                          >
-                            <span
-                              style={
-                                Object {
-                                  "color": "black",
-                                }
-                              }
-                            >
-                              <span
-                                className="obo-text"
-                                data-group-index={1}
-                              >
-                                <span>
-                                  <span>
-                                    <span>
-                                      Two(indent=2)
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
-                            </span>
-                          </li>
-                        </span>
-                      </ul>
-                    </span>
-                  </li>
-                  <li
-                    style={
-                      Object {
-                        "color": "#000",
-                        "listStyleType": "lower-alpha",
-                      }
-                    }
-                  >
-                    <span
-                      style={
-                        Object {
-                          "color": "black",
-                        }
-                      }
-                    >
-                      <span
-                        className="obo-text"
-                        data-group-index={2}
-                      >
-                        <span>
-                          <span>
-                            <span>
-                              Three(indent=6)
-                            </span>
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </li>
-                </span>
-              </ol>
-            </span>
-          </li>
-        </span>
+            </li>
+          </ol>
+        </li>
       </ol>
     </div>
   </div>
@@ -584,422 +377,242 @@ exports[`List List component with irregular indentation 1`] = `
         start={1}
         style={
           Object {
-            "color": "#000",
             "listStyleType": undefined,
           }
         }
       >
-        <span
+        <li
           style={
             Object {
-              "color": "black",
+              "listStyleType": "decimal",
             }
           }
         >
-          <li
+          <span
+            className="obo-text"
+            data-group-index={0}
+          >
+            <span>
+              <span>
+                <span>
+                  One(indent=1)
+                </span>
+              </span>
+            </span>
+          </span>
+          <ol
+            start={1}
             style={
               Object {
-                "color": "#000",
-                "listStyleType": "decimal",
+                "listStyleType": undefined,
               }
             }
           >
-            <span
+            <li
               style={
                 Object {
-                  "color": "black",
+                  "listStyleType": "none",
                 }
               }
             >
-              <span
-                className="obo-text"
-                data-group-index={0}
-              >
-                <span>
-                  <span>
-                    <span>
-                      One(indent=1)
-                    </span>
-                  </span>
-                </span>
-              </span>
-              <ol
+              <ul
                 start={1}
                 style={
                   Object {
-                    "color": "#000",
                     "listStyleType": undefined,
                   }
                 }
               >
-                <span
+                <li
                   style={
                     Object {
-                      "color": "black",
+                      "listStyleType": "square",
                     }
                   }
                 >
-                  <li
+                  <span
+                    className="obo-text"
+                    data-group-index={1}
+                  >
+                    <span>
+                      <span>
+                        <span>
+                          Two(indent=2)
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                  <ol
+                    start={1}
                     style={
                       Object {
-                        "color": "#000",
-                        "listStyleType": "none",
+                        "listStyleType": undefined,
                       }
                     }
                   >
-                    <span
+                    <li
                       style={
                         Object {
-                          "color": "black",
+                          "listStyleType": "none",
                         }
                       }
                     >
-                      <ul
-                        start={1}
+                      <ol
+                        start="10"
                         style={
                           Object {
-                            "color": "#000",
                             "listStyleType": undefined,
                           }
                         }
                       >
-                        <span
+                        <li
                           style={
                             Object {
-                              "color": "black",
+                              "listStyleType": "none",
                             }
                           }
                         >
-                          <li
+                          <ol
+                            start={1}
                             style={
                               Object {
-                                "color": "#000",
-                                "listStyleType": "square",
+                                "listStyleType": undefined,
                               }
                             }
                           >
-                            <span
+                            <li
                               style={
                                 Object {
-                                  "color": "black",
+                                  "listStyleType": "none",
                                 }
                               }
                             >
-                              <span
-                                className="obo-text"
-                                data-group-index={1}
-                              >
-                                <span>
-                                  <span>
-                                    <span>
-                                      Two(indent=2)
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
                               <ol
                                 start={1}
                                 style={
                                   Object {
-                                    "color": "#000",
                                     "listStyleType": undefined,
                                   }
                                 }
                               >
-                                <span
+                                <li
                                   style={
                                     Object {
-                                      "color": "black",
+                                      "listStyleType": "lower-alpha",
                                     }
                                   }
                                 >
-                                  <li
-                                    style={
-                                      Object {
-                                        "color": "#000",
-                                        "listStyleType": "none",
-                                      }
-                                    }
+                                  <span
+                                    className="obo-text"
+                                    data-group-index={2}
                                   >
-                                    <span
-                                      style={
-                                        Object {
-                                          "color": "black",
-                                        }
-                                      }
-                                    >
-                                      <ol
-                                        start="10"
-                                        style={
-                                          Object {
-                                            "color": "#000",
-                                            "listStyleType": undefined,
-                                          }
-                                        }
-                                      >
-                                        <span
-                                          style={
-                                            Object {
-                                              "color": "black",
-                                            }
-                                          }
-                                        >
-                                          <li
-                                            style={
-                                              Object {
-                                                "color": "#000",
-                                                "listStyleType": "none",
-                                              }
-                                            }
-                                          >
-                                            <span
-                                              style={
-                                                Object {
-                                                  "color": "black",
-                                                }
-                                              }
-                                            >
-                                              <ol
-                                                start={1}
-                                                style={
-                                                  Object {
-                                                    "color": "#000",
-                                                    "listStyleType": undefined,
-                                                  }
-                                                }
-                                              >
-                                                <span
-                                                  style={
-                                                    Object {
-                                                      "color": "black",
-                                                    }
-                                                  }
-                                                >
-                                                  <li
-                                                    style={
-                                                      Object {
-                                                        "color": "#000",
-                                                        "listStyleType": "none",
-                                                      }
-                                                    }
-                                                  >
-                                                    <span
-                                                      style={
-                                                        Object {
-                                                          "color": "black",
-                                                        }
-                                                      }
-                                                    >
-                                                      <ol
-                                                        start={1}
-                                                        style={
-                                                          Object {
-                                                            "color": "#000",
-                                                            "listStyleType": undefined,
-                                                          }
-                                                        }
-                                                      >
-                                                        <span
-                                                          style={
-                                                            Object {
-                                                              "color": "black",
-                                                            }
-                                                          }
-                                                        >
-                                                          <li
-                                                            style={
-                                                              Object {
-                                                                "color": "#000",
-                                                                "listStyleType": "lower-alpha",
-                                                              }
-                                                            }
-                                                          >
-                                                            <span
-                                                              style={
-                                                                Object {
-                                                                  "color": "black",
-                                                                }
-                                                              }
-                                                            >
-                                                              <span
-                                                                className="obo-text"
-                                                                data-group-index={2}
-                                                              >
-                                                                <span>
-                                                                  <span>
-                                                                    <span>
-                                                                      Three(indent=6)
-                                                                    </span>
-                                                                  </span>
-                                                                </span>
-                                                              </span>
-                                                            </span>
-                                                          </li>
-                                                        </span>
-                                                      </ol>
-                                                    </span>
-                                                  </li>
-                                                </span>
-                                              </ol>
-                                            </span>
-                                          </li>
-                                        </span>
-                                      </ol>
-                                    </span>
-                                  </li>
-                                </span>
-                              </ol>
-                            </span>
-                          </li>
-                          <li
-                            style={
-                              Object {
-                                "color": "#000",
-                                "listStyleType": "square",
-                              }
-                            }
-                          >
-                            <span
-                              style={
-                                Object {
-                                  "color": "black",
-                                }
-                              }
-                            >
-                              <span
-                                className="obo-text"
-                                data-group-index={3}
-                              >
-                                <span>
-                                  <span>
                                     <span>
-                                      Four(indent=2)
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
-                              <ol
-                                start={1}
-                                style={
-                                  Object {
-                                    "color": "#000",
-                                    "listStyleType": undefined,
-                                  }
-                                }
-                              >
-                                <span
-                                  style={
-                                    Object {
-                                      "color": "black",
-                                    }
-                                  }
-                                >
-                                  <li
-                                    style={
-                                      Object {
-                                        "color": "#000",
-                                        "listStyleType": "none",
-                                      }
-                                    }
-                                  >
-                                    <span
-                                      style={
-                                        Object {
-                                          "color": "black",
-                                        }
-                                      }
-                                    >
-                                      <ol
-                                        start="10"
-                                        style={
-                                          Object {
-                                            "color": "#000",
-                                            "listStyleType": undefined,
-                                          }
-                                        }
-                                      >
-                                        <span
-                                          style={
-                                            Object {
-                                              "color": "black",
-                                            }
-                                          }
-                                        >
-                                          <li
-                                            style={
-                                              Object {
-                                                "color": "#000",
-                                                "listStyleType": "upper-alpha",
-                                              }
-                                            }
-                                          >
-                                            <span
-                                              style={
-                                                Object {
-                                                  "color": "black",
-                                                }
-                                              }
-                                            >
-                                              <span
-                                                className="obo-text"
-                                                data-group-index={4}
-                                              >
-                                                <span>
-                                                  <span>
-                                                    <span>
-                                                      Five(indent=4)
-                                                    </span>
-                                                  </span>
-                                                </span>
-                                              </span>
-                                            </span>
-                                          </li>
-                                        </span>
-                                      </ol>
-                                    </span>
-                                  </li>
-                                  <li
-                                    style={
-                                      Object {
-                                        "color": "#000",
-                                        "listStyleType": "upper-alpha",
-                                      }
-                                    }
-                                  >
-                                    <span
-                                      style={
-                                        Object {
-                                          "color": "black",
-                                        }
-                                      }
-                                    >
-                                      <span
-                                        className="obo-text"
-                                        data-group-index={5}
-                                      >
+                                      <span>
                                         <span>
-                                          <span>
-                                            <span>
-                                              Six(indent=3)
-                                            </span>
-                                          </span>
+                                          Three(indent=6)
                                         </span>
                                       </span>
                                     </span>
-                                  </li>
-                                </span>
+                                  </span>
+                                </li>
                               </ol>
-                            </span>
-                          </li>
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+                <li
+                  style={
+                    Object {
+                      "listStyleType": "square",
+                    }
+                  }
+                >
+                  <span
+                    className="obo-text"
+                    data-group-index={3}
+                  >
+                    <span>
+                      <span>
+                        <span>
+                          Four(indent=2)
                         </span>
-                      </ul>
+                      </span>
                     </span>
-                  </li>
-                </span>
-              </ol>
-            </span>
-          </li>
-        </span>
+                  </span>
+                  <ol
+                    start={1}
+                    style={
+                      Object {
+                        "listStyleType": undefined,
+                      }
+                    }
+                  >
+                    <li
+                      style={
+                        Object {
+                          "listStyleType": "none",
+                        }
+                      }
+                    >
+                      <ol
+                        start="10"
+                        style={
+                          Object {
+                            "listStyleType": undefined,
+                          }
+                        }
+                      >
+                        <li
+                          style={
+                            Object {
+                              "listStyleType": "upper-alpha",
+                            }
+                          }
+                        >
+                          <span
+                            className="obo-text"
+                            data-group-index={4}
+                          >
+                            <span>
+                              <span>
+                                <span>
+                                  Five(indent=4)
+                                </span>
+                              </span>
+                            </span>
+                          </span>
+                        </li>
+                      </ol>
+                    </li>
+                    <li
+                      style={
+                        Object {
+                          "listStyleType": "upper-alpha",
+                        }
+                      }
+                    >
+                      <span
+                        className="obo-text"
+                        data-group-index={5}
+                      >
+                        <span>
+                          <span>
+                            <span>
+                              Six(indent=3)
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </li>
       </ol>
     </div>
   </div>

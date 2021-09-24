@@ -1,4 +1,4 @@
-import getTextItemsForMods from './get-text-items-for-mods'
+import getTextItemsForMods from '../../../../src/scripts/viewer/assessment/assessment-score-reporter/get-text-items-for-mods.js'
 
 describe('getTextItemsForMods', () => {
 	test('returns empty array when no mods', () => {

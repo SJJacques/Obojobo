@@ -42,18 +42,9 @@ const renderEl = (props, node, index, indent) => {
 			)
 		case 'element': {
 			const ElType = node.type
-			const color = node.getColorOfFirstCharacter()
-
 			return (
-				<ElType
-					key={key}
-					start={node.start}
-					style={{
-						listStyleType: node.listStyleType,
-						color: color
-					}}
-				>
-					<span style={{ color: 'black' }}>{renderChildren(props, node.children, indent + 1)}</span>
+				<ElType key={key} start={node.start} style={{ listStyleType: node.listStyleType }}>
+					{renderChildren(props, node.children, indent + 1)}
 				</ElType>
 			)
 		}

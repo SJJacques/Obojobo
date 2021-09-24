@@ -4,7 +4,6 @@ import React from 'react'
 import { ReactEditor } from 'slate-react'
 import { Transforms } from 'slate'
 import ModProperties from './mod-properties'
-import AssessmentRubric from '../../assessment-rubric'
 import Common from 'obojobo-document-engine/src/scripts/common'
 
 const getParsedRange = Common.util.RangeParsing.getParsedRange
@@ -124,7 +123,7 @@ class RubricModal extends React.Component {
 		const stopPropagation = event => event.stopPropagation()
 
 		let className = 'assessment-score '
-		className += this.state.type === AssessmentRubric.TYPE_PASS_FAIL ? 'add-padding-bottom' : ''
+		className += this.state.type === 'pass-fail' ? 'add-padding-bottom' : ''
 
 		return (
 			<SimpleDialog
@@ -145,8 +144,8 @@ class RubricModal extends React.Component {
 							<input
 								type="radio"
 								name="score-type"
-								value={AssessmentRubric.TYPE_HIGHEST}
-								checked={this.state.type === AssessmentRubric.TYPE_HIGHEST}
+								value="highest"
+								checked={this.state.type === 'highest'}
 								onChange={this.changeRubricType}
 								onClick={stopPropagation}
 							/>
@@ -156,15 +155,15 @@ class RubricModal extends React.Component {
 							<input
 								type="radio"
 								name="score-type"
-								value={AssessmentRubric.TYPE_PASS_FAIL}
-								checked={this.state.type === AssessmentRubric.TYPE_PASS_FAIL}
+								value="pass-fail"
+								checked={this.state.type === 'pass-fail'}
 								onChange={this.changeRubricType}
 								onClick={stopPropagation}
 							/>
 							Calculate based on a threshold (pass/fail)
 						</label>
 					</fieldset>
-					{this.state.type === AssessmentRubric.TYPE_PASS_FAIL && (
+					{this.state.type === 'pass-fail' && (
 						<div className="threshold-properties-section">
 							<fieldset className="pass-fail">
 								<legend>Pass & Fail Rules</legend>
@@ -199,8 +198,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="attempt-score"
-												value={AssessmentRubric.VAR_ATTEMPT_SCORE}
-												checked={this.state.passedType === AssessmentRubric.VAR_ATTEMPT_SCORE}
+												value="$attempt_score"
+												checked={this.state.passedType === '$attempt_score'}
 												onChange={this.passedType}
 											/>
 											The attempt score
@@ -212,8 +211,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="specified-value"
-												value={AssessmentRubric.SET_VALUE}
-												checked={this.state.passedType === AssessmentRubric.SET_VALUE}
+												value="set-value"
+												checked={this.state.passedType === 'set-value'}
 												onChange={this.passedType}
 											/>
 											Specified value:
@@ -226,7 +225,7 @@ class RubricModal extends React.Component {
 											value={this.state.passedResult}
 											onClick={stopPropagation}
 											onChange={this.onChangeState}
-											disabled={this.state.passedType !== AssessmentRubric.SET_VALUE}
+											disabled={this.state.passedType !== 'set-value'}
 											onFocus={this.freezeEditor}
 											onBlur={this.unfreezeEditor}
 										/>
@@ -242,8 +241,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="set-score-to-attempt-score"
-												value={AssessmentRubric.VAR_ATTEMPT_SCORE}
-												checked={this.state.failedType === AssessmentRubric.VAR_ATTEMPT_SCORE}
+												value="$attempt_score"
+												checked={this.state.failedType === '$attempt_score'}
 												onChange={this.failedType}
 											/>
 											Set the assessment score to the attempt score
@@ -255,8 +254,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="dont-set-score"
-												value={AssessmentRubric.NO_SCORE}
-												checked={this.state.failedType === AssessmentRubric.NO_SCORE}
+												value="no-score"
+												checked={this.state.failedType === 'no-score'}
 												onChange={this.failedType}
 											/>
 											Don&apos;t set the score (no score will be sent to the gradebook)
@@ -268,8 +267,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="set-score-to-specific-value"
-												value={AssessmentRubric.SET_VALUE}
-												checked={this.state.failedType === AssessmentRubric.SET_VALUE}
+												value="set-value"
+												checked={this.state.failedType === 'set-value'}
 												onChange={this.failedType}
 											/>
 											Set the assessment score to specified value
@@ -282,7 +281,7 @@ class RubricModal extends React.Component {
 											value={this.state.failedResult}
 											onClick={stopPropagation}
 											onChange={this.onChangeState}
-											disabled={this.state.failedType !== AssessmentRubric.SET_VALUE}
+											disabled={this.state.failedType !== 'set-value'}
 											onFocus={this.freezeEditor}
 											onBlur={this.unfreezeEditor}
 										/>
@@ -299,8 +298,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="out-of-attempts-no-value"
-												value={AssessmentRubric.NO_VALUE}
-												checked={this.state.unableToPassType === AssessmentRubric.NO_VALUE}
+												value="no-value"
+												checked={this.state.unableToPassType === 'no-value'}
 												onChange={this.unableToPassType}
 											/>
 											Don&apos;t do anything, the failing rule will still apply
@@ -312,10 +311,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="out-of-attempts-highest-attempt-score"
-												value={AssessmentRubric.VAR_HIGHEST_ATTEMPT_SCORE}
-												checked={
-													this.state.unableToPassType === AssessmentRubric.VAR_HIGHEST_ATTEMPT_SCORE
-												}
+												value="$highest_attempt_score"
+												checked={this.state.unableToPassType === '$highest_attempt_score'}
 												onChange={this.unableToPassType}
 											/>
 											Set the assessment score to the highest attempt score
@@ -327,8 +324,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="out-of-attempts-no-score"
-												value={AssessmentRubric.NO_SCORE}
-												checked={this.state.unableToPassType === AssessmentRubric.NO_SCORE}
+												value="no-score"
+												checked={this.state.unableToPassType === 'no-score'}
 												onChange={this.unableToPassType}
 											/>
 											Don&apos;t set assessment the score (no score will be sent to the gradebook)
@@ -340,8 +337,8 @@ class RubricModal extends React.Component {
 											<input
 												type="radio"
 												id="out-of-attempts-set-value"
-												value={AssessmentRubric.SET_VALUE}
-												checked={this.state.unableToPassType === AssessmentRubric.SET_VALUE}
+												value="set-value"
+												checked={this.state.unableToPassType === 'set-value'}
 												onChange={this.unableToPassType}
 											/>
 											Set the assessment score to specified value
@@ -354,7 +351,7 @@ class RubricModal extends React.Component {
 											value={this.state.unableToPassResult || 0}
 											onClick={stopPropagation}
 											onChange={this.onChangeState}
-											disabled={this.state.unableToPassType !== AssessmentRubric.SET_VALUE}
+											disabled={this.state.unableToPassType !== 'set-value'}
 											onFocus={this.freezeEditor}
 											onBlur={this.unfreezeEditor}
 										/>

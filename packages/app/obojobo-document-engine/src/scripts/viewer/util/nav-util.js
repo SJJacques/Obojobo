@@ -39,6 +39,10 @@ const NavUtil = {
 		})
 	},
 
+	isRedAlertEnabled(state) {
+		return state.redAlert
+	},
+
 	// gotoCurrentPathname: () ->
 	// 	window.location.pathname
 
@@ -241,6 +245,14 @@ const NavUtil = {
 		})
 	},
 
+	setRedAlert(redAlert) {
+		return Dispatcher.trigger('nav:setRedAlert', {
+			value: {
+				redAlert
+			}
+		})
+	},
+	
 	resetContext() {
 		return Dispatcher.trigger('nav:resetContext')
 	},

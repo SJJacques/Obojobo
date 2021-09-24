@@ -7,6 +7,7 @@ const insertEvent = oboRequire('server/insert_event')
 const createCaliperEvent = oboRequire('server/routes/api/events/create_caliper_event')
 const { ACTOR_USER } = oboRequire('server/routes/api/events/caliper_constants')
 const { getSessionIds } = oboRequire('server/routes/api/events/caliper_utils')
+const db = oboRequire('server/db')
 const {
 	checkValidationRules,
 	requireCurrentUser,
@@ -41,6 +42,11 @@ router
 	.route('/start')
 	.post([requireCurrentUser, requireCurrentDocument, requireCurrentVisit, checkValidationRules])
 	.post((req, res) => {
+		let isRedAlertEnabled = false
+
+		const userId = req.currentUser.id
+		const draftId = req.currentDocument.draftId
+
 		logger.log(
 			`VISIT: Begin start visit for visitId="${req.currentVisit.id}", draftContentId="${req.currentDocument.contentId}"`
 		)
@@ -53,7 +59,8 @@ router
 			viewerState.get(
 				req.currentUser.id,
 				req.currentDocument.contentId,
-				req.currentVisit.resource_link_id
+				req.currentVisit.resource_link_id,
+				req.getCurrentVisitFromRequest().catch(() => {throw 'Unable to start visit, visitId is no longer valid'})
 			),
 			getDraftAndStartVisitProps(req, res)
 		])
@@ -101,6 +108,23 @@ router
 					})
 				})
 			})
+			.then(() =>
+				db.oneOrNone(
+					`
+						SELECT is_enabled FROM red_alert_status
+						WHERE
+							user_id = $[userId]
+							AND draft_id = $[draftId]
+					`,
+					{
+						userId,
+						draftId
+					}
+				)
+			)
+			.then(result => {
+				if (result) isRedAlertEnabled = result.is_enabled
+			})
 			.then(() => {
 				logger.log(
 					`VISIT: Start visit success for visitId="${req.currentVisit.id}", draftId="${req.currentDocument.draftId}", userId="${req.currentUser.id}"`
@@ -117,6 +141,7 @@ router
 				req.session.visitSessions[req.currentDocument.draftId] = true
 
 				res.success({
+					isRedAlertEnabled,
 					visitId: req.currentVisit.id,
 					isPreviewing: req.currentVisit.is_preview,
 					lti,

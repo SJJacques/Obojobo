@@ -11,7 +11,10 @@ jest.mock('Common', () => ({
 	}
 }))
 
-jest.mock('../assessment-score-report-view', () => props => <div {...props}></div>)
+jest.mock(
+	'obojobo-document-engine/src/scripts/viewer/assessment/assessment-score-report-view',
+	() => props => <div {...props}></div>
+)
 
 describe('ResultsDialog', () => {
 	beforeEach(() => {

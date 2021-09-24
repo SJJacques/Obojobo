@@ -93,6 +93,20 @@ class NavStore extends Store {
 					navItem.flags[payload.value.flagName] = payload.value.flagValue
 					this.triggerChange()
 				},
+				'nav:setRedAlert': payload => {
+					ViewerAPI.postEvent({
+						draftId: this.state.draftId,
+						action: 'nav:setRedAlert',
+						eventVersion: '1.0.0',
+						visitId: this.state.visitId,
+						payload: {
+							from: this.state.redAlert,
+							to: payload.value.redAlert
+						}
+					})
+					this.state.redAlert = payload.value.redAlert
+					this.triggerChange()
+				},
 				'nav:prev': () => {
 					oldNavTargetId = this.state.navTargetId
 					const prev = NavUtil.getPrev(this.state)
@@ -205,10 +219,11 @@ class NavStore extends Store {
 		)
 	}
 
-	init(draftId, model, startingId, startingPath, visitId, viewState = {}) {
+	init(draftId, model, startingId, startingPath, visitId, viewState = {}, isRedAlertEnabled = false) {
 		this.state = {
 			isInitialized: true,
 			items: {},
+			redAlert: isRedAlertEnabled,
 			itemsById: {},
 			itemsByPath: {},
 			itemsByFullPath: {},

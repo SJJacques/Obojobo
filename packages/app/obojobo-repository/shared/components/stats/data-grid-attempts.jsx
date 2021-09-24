@@ -16,30 +16,6 @@ const cellString = selector => {
 
 const columns = [
 	{
-		name: 'Username',
-		selector: 'userUsername',
-		sortable: true,
-		advanced: true
-	},
-	{
-		name: 'First Name',
-		selector: 'userFirstName',
-		sortable: true,
-		advanced: false
-	},
-	{
-		name: 'Last Name',
-		selector: 'userLastName',
-		sortable: true,
-		advanced: false
-	},
-	{
-		name: 'User Roles',
-		selector: 'userRoles',
-		sortable: true,
-		advanced: true
-	},
-	{
 		name: 'Course ID',
 		selector: 'contextId',
 		sortable: true,
@@ -91,6 +67,30 @@ const columns = [
 	{
 		name: 'Assessment ID',
 		selector: 'assessmentId',
+		sortable: true,
+		advanced: true
+	},
+	{
+		name: 'Username',
+		selector: 'userUsername',
+		sortable: true,
+		advanced: true
+	},
+	{
+		name: 'First Name',
+		selector: 'userFirstName',
+		sortable: true,
+		advanced: false
+	},
+	{
+		name: 'Last Name',
+		selector: 'userLastName',
+		sortable: true,
+		advanced: false
+	},
+	{
+		name: 'User Roles',
+		selector: 'userRoles',
 		sortable: true,
 		advanced: true
 	},
