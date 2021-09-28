@@ -111,9 +111,7 @@ export default class Nav extends React.Component {
 
 	onClickRedAlert() {
 		const isRedAlertEnabled = NavUtil.isRedAlertEnabled(this.props.navState)
-		console.log('click event 1')
 		NavUtil.setRedAlert(!isRedAlertEnabled)
-		console.log('click event 2')
 	}
 
 	renderLabel(label) {
@@ -232,7 +230,6 @@ export default class Nav extends React.Component {
 
 	render() {
 		const navState = this.props.navState
-		console.log(navState)
 		const isRedAlertEnabled = NavUtil.isRedAlertEnabled(navState)
 		const list = NavUtil.getOrderedList(navState)
 		const lockEl = this.getLockEl(navState.locked)
@@ -261,11 +258,7 @@ export default class Nav extends React.Component {
 				>
 					Skip Navigation
 				</Button>
-				<Button 
-					onClick={this.onClickRedAlert}
-				>
-					RED ALERT
-				</Button>
+				<Button onClick={this.onClickRedAlert}>RED ALERT</Button>
 				<button className="toggle-button" onClick={NavUtil.toggle}>
 					Toggle Navigation Menu
 				</button>

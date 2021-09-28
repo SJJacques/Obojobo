@@ -44,7 +44,6 @@ const requireCurrentUser = async req => {
 		throw new Error('Login Required')
 	}
 
-	console.log(user)
 	return user
 }
 

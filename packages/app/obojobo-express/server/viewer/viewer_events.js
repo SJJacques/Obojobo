@@ -22,7 +22,6 @@ oboEvents.on('client:nav:setRedAlert', event => {
 	const userId = event.userId
 	const draftId = event.draftId
 	const isRedAlertEnabled = event.payload.to
-	console.log('event nav set redalert')
 	return db
 		.none(
 			`
@@ -44,7 +43,6 @@ oboEvents.on('client:nav:setRedAlert', event => {
 			logger.error('DB UNEXPECTED on red_alert_status.set', error, error.toString())
 		})
 })
-
 
 module.exports = (req, res, next) => {
 	next()

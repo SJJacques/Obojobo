@@ -62,7 +62,7 @@ jest.mock('../../../src/scripts/viewer/util/nav-util', () => ({
 	getNavTarget: jest.fn(),
 	close: jest.fn(),
 	open: jest.fn(),
-	isRedAlertEnabled: jers.fn(),
+	isRedAlertEnabled: jest.fn(),
 	setRedAlert: jest.fn()
 }))
 
@@ -357,7 +357,6 @@ describe('Nav', () => {
 		expect(tree).toMatchSnapshot()
 	})
 
-
 	test('onClick link checks NavUtil.canNavigate and changes the page', () => {
 		NavUtil.getOrderedList.mockReturnValueOnce([
 			{
@@ -466,7 +465,6 @@ describe('Nav', () => {
 		expect(NavUtil.isRedAlertEnabled).toHaveBeenCalled()
 		expect(NavUtil.setRedAlert).toHaveBeenCalledWith(redAlert)
 	})
-
 
 	test('Clicking on a link calls NavUtil.goto and FocusUtil.focusOnNavigation', () => {
 		NavUtil.getOrderedList.mockReturnValue([

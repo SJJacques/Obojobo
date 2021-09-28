@@ -42,15 +42,13 @@ router
 	.route('/start')
 	.post([requireCurrentUser, requireCurrentDocument, requireCurrentVisit, checkValidationRules])
 	.post((req, res) => {
-		let isRedAlertEnabled = false
-
-		const userId = req.currentUser.id
-		const draftId = req.currentDocument.draftId
-
 		logger.log(
 			`VISIT: Begin start visit for visitId="${req.currentVisit.id}", draftContentId="${req.currentDocument.contentId}"`
 		)
 
+		const userId = req.currentUser.id
+		const draftId = req.currentDocument.draftId
+		let isRedAlertEnabled = false
 		let viewState
 		let visitStartExtensions
 		let launch
@@ -59,8 +57,7 @@ router
 			viewerState.get(
 				req.currentUser.id,
 				req.currentDocument.contentId,
-				req.currentVisit.resource_link_id,
-				req.getCurrentVisitFromRequest().catch(() => {throw 'Unable to start visit, visitId is no longer valid'})
+				req.currentVisit.resource_link_id
 			),
 			getDraftAndStartVisitProps(req, res)
 		])
