@@ -47,6 +47,15 @@ class NumericAssessment extends React.Component {
 				<Button className="add-answer-btn" onClick={() => this.onAddNumericInput()}>
 					+ Add possible answer
 				</Button>
+				<div
+					className="obojobo-draft--chunks--numeric-assessment--question-metric-container"
+				>
+					<label className='i-dont-know-num'>
+						<input type="checkbox" onChange={this.setDontKnowType}/>
+						Toggle 'I don't know' response
+					</label>
+
+				</div>
 			</div>
 		)
 	}

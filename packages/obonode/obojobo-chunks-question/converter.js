@@ -2,11 +2,21 @@ import Common from 'obojobo-document-engine/src/scripts/common'
 import Component from 'obojobo-document-engine/src/scripts/oboeditor/components/node/editor'
 import withoutUndefined from 'obojobo-document-engine/src/scripts/common/util/without-undefined'
 
+
+// extras for testing with abstract assessment modification
+import OboModel from 'obojobo-document-engine/src/scripts/common/models/obo-model'
+import { CHOICE_NODE } from 'obojobo-chunks-abstract-assessment/constants'
+import TextUtil from 'obojobo-document-engine/src/scripts/oboeditor/util/text-util'
+
 const QUESTION_NODE = 'ObojoboDraft.Chunks.Question'
 const SOLUTION_NODE = 'ObojoboDraft.Chunks.Question.Solution'
 const MCASSESSMENT_NODE = 'ObojoboDraft.Chunks.MCAssessment'
 const NUMERIC_ASSESSMENT_NODE = 'ObojoboDraft.Chunks.NumericAssessment'
 const PAGE_NODE = 'ObojoboDraft.Pages.Page'
+
+// extras for testing with abstract assessment modification
+const MC_CHOICE_NODE = 'ObojoboDraft.Chunks.MCAssessment.MCChoice'
+
 
 /**
  * Generates an Obojobo Question Node from a Slate node.
