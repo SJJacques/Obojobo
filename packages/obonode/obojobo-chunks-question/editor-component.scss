@@ -16,52 +16,59 @@
 		padding-top: 2em;
 		font-family: $font-default;
 		font-weight: bold;
-
+		display: flex;
 		> label {
 			vertical-align: middle;
 		}
+		
+		.toggle-container {
+			display: flex;
+			align-self: right;
 
-		.question-type {
-			position: absolute;
-			top: 2.85em;
-			right: 4.3em;
-			border: 1px solid $color-shadow;
-			border-radius: $dimension-rounded-radius;
-			padding: 0.25em;
-			padding-right: 1em;
-			font-weight: normal;
-			font-size: 0.7em;
-			cursor: pointer;
-
-			&:hover {
-				border: 1px solid $color-action;
-				background: lighten($color-action, 48%);
+			.question-type {
+				// top: 2.85em;
+				// right: 4.3em;
+				// align-content: flex-start;
+				border: 1px solid $color-shadow;
+				border-radius: $dimension-rounded-radius;
+				padding: 0.25em;
+				padding-right: 1em;
+				font-weight: normal;
+				font-size: 0.7em;
+				cursor: pointer;
+	
+				&:hover {
+					border: 1px solid $color-action;
+					background: lighten($color-action, 48%);
+				}
+	
+				input {
+					position: relative;
+					top: 0.1em;
+					left: 0.2em;
+					margin-right: 1em;
+				}
 			}
-
-			input {
-				position: relative;
-				top: 0.1em;
-				left: 0.2em;
-				margin-right: 1em;
-			}
+	
+			.i-dont-know {
+				// top: 2.85em;
+				// right: 15.3em;
+				// align-content: flex-end;
+				border: 1px solid $color-shadow;
+				border-radius: $dimension-rounded-radius;
+				padding: 0.25em;
+				padding-right: 1em;
+				font-weight: normal;
+				font-size: 0.7em;
+				cursor: pointer;
+	
+				&:hover {
+					border: 1px solid $color-action;
+					background: lighten($color-action, 48%);
+				}
+			
 		}
 
-		.i-dont-know {
-			position: absolute;
-			top: 2.85em;
-			right: 15.3em;
-			border: 1px solid $color-shadow;
-			border-radius: $dimension-rounded-radius;
-			padding: 0.25em;
-			padding-right: 1em;
-			font-weight: normal;
-			font-size: 0.7em;
-			cursor: pointer;
-
-			&:hover {
-				border: 1px solid $color-action;
-				background: lighten($color-action, 48%);
-			}
 
 			input {
 				position: relative;

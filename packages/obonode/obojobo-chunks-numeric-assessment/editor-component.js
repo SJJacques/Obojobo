@@ -50,11 +50,6 @@ class NumericAssessment extends React.Component {
 				<div
 					className="obojobo-draft--chunks--numeric-assessment--question-metric-container"
 				>
-					<label className='i-dont-know-num'>
-						<input type="checkbox" onChange={this.setDontKnowType}/>
-						Toggle 'I don't know' response
-					</label>
-
 				</div>
 			</div>
 		)

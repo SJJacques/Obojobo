@@ -5,6 +5,10 @@ const { OboModel } = Common.models
 const Adapter = {
 	construct(model) {
 		model.setStateProp('type', 'default', p => p.toLowerCase(), ['default', 'survey'])
+		// change the second string in the parenthesis to 'default' 
+		// when you get the conditional logic figured out
+		model.setStateProp('dontKnowType', 'dontKnow', p => p.toLowerCase(), ['default', 'dontKnow'])
+		model.setStateProp('dontKnowResponse', 'default', p => p.toLowerCase(), ['default', 'iDontKnow'])
 		model.setStateProp('solution', null, p => (p ? OboModel.create(p) : null))
 		model.setStateProp('revealAnswer', 'default', p => p.toLowerCase(), [
 			'default',
@@ -38,6 +42,7 @@ const Adapter = {
 
 	clone(model, clone) {
 		clone.modelState.type = model.modelState.type
+		// clone.modelState.dontKnowType = model.modelState.dontKnowType
 		clone.modelState.correctLabels = model.modelState.correctLabels
 			? model.modelState.correctLabels.slice(0)
 			: null
@@ -54,6 +59,7 @@ const Adapter = {
 
 	toJSON(model, json) {
 		json.content.type = model.modelState.type
+		// json.content.dontKnowType = model.modelState.dontKnowType
 		json.content.correctLabels = model.modelState.correctLabels
 			? model.modelState.correctLabels.join('|')
 			: null

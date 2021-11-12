@@ -11,13 +11,6 @@ const CHOICE_NODE = 'ObojoboDraft.Chunks.AbstractAssessment.Choice'
 const MCANSWER_NODE = 'ObojoboDraft.Chunks.MCAssessment.MCAnswer'
 const TEXT_NODE = 'ObojoboDraft.Chunks.Text'
 const TEXT_LINE_NODE = 'ObojoboDraft.Chunks.Text.TextLine'
-// tracks information regarding the i don't know toggle and confidence slider
-const questionMetricsObject = {
-	dontKnowType: false,
-	dontKnowIndex:  null,
-	confidenceType: false,
-	confidenceIndex: null
-}
 
 class MCAssessment extends React.Component {
 	constructor(props) {
@@ -26,7 +19,6 @@ class MCAssessment extends React.Component {
 		this.changeResponseType = this.changeResponseType.bind(this)
 		this.changeShuffle = this.changeShuffle.bind(this)
 		this.addChoice = this.addChoice.bind(this)
-		this.onSetDontKnowType = this.onSetDontKnowType.bind(this)
 	}
 
 	changeResponseType(event) {
@@ -80,44 +72,6 @@ class MCAssessment extends React.Component {
 		)
 	}
 
-	onSetDontKnowType(event) {
-		const path = ReactEditor.findPath(this.props.editor, this.props.element)
-		event.target.checked ? questionMetricsObject.dontKnowType = true : questionMetricsObject.dontKnowType = false
-	
-		if (questionMetricsObject.dontKnowType === true && questionMetricsObject.dontKnowIndex === null) {
-			questionMetricsObject.dontKnowIndex = this.props.element.children.length
-
-			console.log("metrics object true",questionMetricsObject)
-			return Transforms.insertNodes(
-				this.props.editor,
-				{
-					type: CHOICE_NODE,
-					content: { score: 0 },
-					children: [
-						{
-							type: MCANSWER_NODE,
-							content: {},
-							children: [
-								{
-									type: TEXT_NODE,
-									subtype: TEXT_LINE_NODE,
-									content: { indent: 0 },
-									children: [{ text: 'I don\'t know'}]
-							}
-							]
-						}
-					]
-				},
-				{ at: path.concat(questionMetricsObject.dontKnowIndex) }
-			)
-		}
-		else {
-			Transforms.removeNodes(this.props.editor, { at: this.props.element.children[questionMetricsObject.dontKnowIndex]})
-			questionMetricsObject.dontKnowIndex = null
-			return questionMetricsObject.dontKnowType = false
-		}
-	}
-
 	render() {
 		const questionType = this.props.element.questionType || 'default'
 		const content = this.props.element.content
@@ -137,16 +91,7 @@ class MCAssessment extends React.Component {
 					<Switch title="Shuffle Choices" checked={content.shuffle} onChange={this.changeShuffle} />
 				</div>
 				<div className="choices-container">
-					{this.props.children}
-					<div
-						contentEditable={false}
-						className="obojobo-draft--chunks--mc-assessment--question-metric-container"
-					>
-						<label className="i-dont-know-mc" contentEditable={false}>
-							<input type="checkbox" onChange={this.onSetDontKnowType} />
-								Toggle 'I don't know' option
-						</label>
-					</div>	
+					{this.props.children}	
 					<div
 						contentEditable={false}
 						className="obojobo-draft--chunks--mc-assessment--choice-button-container"

@@ -26,6 +26,7 @@ const QuestionComponent = ({
 	updateExplanationRef,
 	startQuestionAriaLabel,
 	type,
+	dontKnowType,
 	mode,
 	isFlipping,
 	viewState,
@@ -34,6 +35,8 @@ const QuestionComponent = ({
 	isAnswerRevealed,
 	isShowingExplanation,
 	isShowingExplanationButton,
+	isShowingIDontKnow,
+	setDontKnowResponse,
 	instructions,
 	score,
 	scoreClass,
@@ -109,6 +112,18 @@ const QuestionComponent = ({
 								response={response}
 								disabled={isFormDisabled}
 							/>
+						</div>
+						<div className="metrics-component">
+							{isAssessmentQuestion  && isShowingIDontKnow ? ( 
+								<Button
+									className="dont-know-response"
+									onClick={setDontKnowResponse, onFormChange}
+								>
+									I don't know
+								</Button>
+							) : (
+								<span />
+							)}
 						</div>
 					</fieldset>
 					{!isAssessmentQuestion ? (

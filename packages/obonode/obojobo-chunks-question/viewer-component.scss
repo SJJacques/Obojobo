@@ -265,7 +265,7 @@
 					display: block;
 					font-family: $font-default;
 					color: $color-action;
-					font-size: $font-size;
+					font-size: $font-size; 
 					font-weight: normal;
 					width: 100%;
 					box-sizing: border-box;
@@ -276,6 +276,16 @@
 
 				> .assessment-component {
 					background: $color-bg;
+				}
+				
+				> .metrics-component {
+					background: $color-bg;
+
+					> .dont-know-response {
+						display: block;
+						padding-bottom: 1em;
+						padding-top: 00.5em;
+					}
 				}
 			}
 

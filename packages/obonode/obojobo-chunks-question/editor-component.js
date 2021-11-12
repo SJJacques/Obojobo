@@ -18,9 +18,6 @@ const PAGE_NODE = 'ObojoboDraft.Pages.Page'
 const TEXT_NODE = 'ObojoboDraft.Chunks.Text'
 const TEXT_LINE_NODE = 'ObojoboDraft.Chunks.Text.TextLine'
 
-// mc editor component elements
-const CHOICE_NODE = 'ObojoboDraft.Chunks.AbstractAssessment.Choice'
-const MCANSWER_NODE = 'ObojoboDraft.Chunks.MCAssessment.MCAnswer'
 
 class Question extends React.Component {
 	constructor(props) {
@@ -68,45 +65,18 @@ class Question extends React.Component {
 
 	onSetDontKnowType(event) {
 		const dontKnowType = event.target.checked ? 'dontKnow' : 'default'
-		const dontKnowObject = 
-		{
-			"type": "ObojoboDraft.Chunks.AbstractAssessment.Choice",
-			"content": {
-			  "score": 0
-			},
-			"children": [
-			  {
-				"type": "ObojoboDraft.Chunks.MCAssessment.MCAnswer",
-				"content": {},
-				"children": [
-				  {
-					"type": "ObojoboDraft.Chunks.Text",
-					"content": {},
-					"children": [
-					  {
-						"type": "ObojoboDraft.Chunks.Text",
-						"subtype": "ObojoboDraft.Chunks.Text.TextLine",
-						"content": {
-						  "indent": 0
-						},
-						"children": [
-						  {
-							"text": "I don't know"
-						  }
-						],
-						"id": "7b51a0a5-3daa-4b2b-9e76-96b4571a1107"
-					  }
-					],
-					"id": "078c3c39-f31b-4a30-bc52-dd5d55660366"
-				  }
-				],
-				"id": "938e5ad0-daa1-4255-8256-c419b335d799"
-			  }
-			],
-			"id": "a4510c6a-04e5-4901-8950-838ab729ed44"
-		}
-		
+
+		// update this element's content.dontKnowType
 		const path = ReactEditor.findPath(this.props.editor, this.props.element)
+		Transforms.setNodes(
+			this.props.editor,
+			{ content: { ...this.props.element.content, dontKnowType } },
+			{ at: path }
+		)
+
+		console.log("editor props", this.props.editor)
+		console.log("this.props.element.children", this.props.element.children)
+		console.log("dontKnowType", dontKnowType)
 
 		// The Question Assessment item should be the last child
 		// This determines whether the assessment is numeric or MC
@@ -122,45 +92,6 @@ class Question extends React.Component {
 
 		// the actual question assessment item
 		const questionArray = this.props.element.children[lastChildIndex].children
-
-		// console.log("this.props.element.content: ", this.props.element.content)
-		// console.log("this should match w/ add possible answer: ", questionArray)
-
-		// update this element's content.dontKnowType
-		Transforms.setNodes(
-			this.props.editor,
-			{ content: { ...this.props.element.content, dontKnowType } },
-			{ at: path }
-		)
-
-		// console.log("this.props.editor: ", this.props.editor)
-		// console.log("this.props.element.children: ", this.props.element.children)
-
-		if (this.props.element.content.dontKnowType === 'dontKnow') {
-			return Transforms.insertNodes(
-				this.props.editor,
-				{
-					type: CHOICE_NODE,
-					content: { score: 0 },
-					children: [
-						{
-							type: MCANSWER_NODE,
-							content: {},
-							children: [
-								{
-									type: TEXT_NODE,
-									subtype: TEXT_LINE_NODE,
-									content: { indent: 0 },
-									children: [{ text: 'I don\'t know'}]
-							}
-							]
-						}
-					]
-				},
-				{ at: path.concat(questionArray.length) }
-			)
-		}
-		
 	}
 
 	getHasSolution() {
@@ -266,7 +197,7 @@ class Question extends React.Component {
 		const content = element.content
 
 		const isTypeSurvey = content.type === 'survey'
-		// const isTypeDontKnow = content.dontKnowType === 'dontKnow'
+		const isTypeIDontKnow = content.dontKnowType === 'dontKnow'
 
 		const hasSolution = this.getHasSolution()
 		let questionType
@@ -300,14 +231,16 @@ class Question extends React.Component {
 									<option value={MCASSESSMENT_NODE}>Multiple choice</option>
 									<option value={NUMERIC_ASSESSMENT_NODE}>Input a number</option>
 								</select>
-								<label className="question-type" contentEditable={false}>
-									<input type="checkbox" checked={isTypeSurvey} onChange={this.onSetType} />
-									Survey Only
-								</label>
-								<label className="i-dont-know" contentEditable={false}>
-									<input type="checkbox" onChange={this.onSetDontKnowType} />
-									Toggle 'I don't know' option
-								</label>
+								<div className="toggle-container">
+									<label className="question-type" contentEditable={false}>
+										<input type="checkbox" checked={isTypeSurvey} onChange={this.onSetType} />
+										Survey Only
+									</label>
+									<label className="i-dont-know" contentEditable={false}>
+										<input type="checkbox" checked={isTypeIDontKnow} onChange={this.onSetDontKnowType} />
+										Toggle 'I don't know' option
+									</label>
+								</div>
 							</div>
 							{this.props.children}
 							{hasSolution ? null : (

@@ -20,14 +20,18 @@ const FOCUS_TARGET_EXPLANATION = 'explanation'
 const FOCUS_TARGET_RESULTS = 'results'
 const FOCUS_TARGET_QUESTION = 'question'
 const FOCUS_TARGET_ANSWERS = 'answers'
+// const iDontKnowOverride = { dontKnowClicked: false }
+let currentResponse
 
 export default class Question extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			isFlipping: false
+			isFlipping: false,
+			dontKnowClicked: false
 		}
+
 
 		this.assessmentComponentRef = React.createRef()
 		this.resultsRef = React.createRef()
@@ -41,6 +45,8 @@ export default class Question extends React.Component {
 		this.onClickShowExplanation = this.onClickShowExplanation.bind(this)
 		this.onClickHideExplanation = this.onClickHideExplanation.bind(this)
 		this.isShowingExplanation = this.isShowingExplanation.bind(this)
+		this.isShowingIDontKnow = this.isShowingIDontKnow.bind(this)
+		this.setDontKnowResponse = this.setDontKnowResponse.bind(this)
 		this.getInstructions = this.getInstructions.bind(this)
 	}
 
@@ -86,17 +92,39 @@ export default class Question extends React.Component {
 			this.props.moduleData.navState.context
 		)
 
-		const response = this.assessmentComponentRef.current.handleFormChange(event, prevResponse)
+		
+		const response = this.assessmentComponentRef.current.handleFormChange(event, prevResponse)	
+		currentResponse = response
 
-		QuestionUtil.setResponse(
-			this.props.model.get('id'),
-			response.state,
-			response.targetId,
-			this.props.moduleData.navState.context,
-			this.props.moduleData.navState.context.split(':')[1],
-			this.props.moduleData.navState.context.split(':')[2],
-			response.sendResponseImmediately
-		)
+		// set default dontKnowClicked property on current question
+		if (response.state.dontKnow === null)
+			response.state.dontKnowClicked = false
+		
+		// change dontKnow property based on whether 'I don't know' button is pressed
+		if (response.state.dontKnowClicked) {
+			response.state.dontKnow = "I don't know"
+			QuestionUtil.setResponse(
+				this.props.model.get('id'),
+				response.state,
+				response.targetId,
+				this.props.moduleData.navState.context,
+				this.props.moduleData.navState.context.split(':')[1],
+				this.props.moduleData.navState.context.split(':')[2],
+				response.sendResponseImmediately
+			)	
+		}
+		else if (!response.state.dontKnowClicked) {
+			response.state.dontKnow = "default"
+			QuestionUtil.setResponse(
+				this.props.model.get('id'),
+				response.state,
+				response.targetId,
+				this.props.moduleData.navState.context,
+				this.props.moduleData.navState.context.split(':')[1],
+				this.props.moduleData.navState.context.split(':')[2],
+				response.sendResponseImmediately
+			)
+		}
 
 		this.nextFocus = FOCUS_TARGET_RESULTS
 	}
@@ -113,6 +141,12 @@ export default class Question extends React.Component {
 		event.target.reportValidity()
 
 		event.target.reset()
+	}
+
+	setDontKnowResponse() {
+		// this.state.dontKnowClicked = !this.state.dontKnowClicked
+		// console.log("dontKnowClicked?", this.state.dontKnowClicked)
+		currentResponse.dontKnowClicked = !currentResponse.dontKnowClicked
 	}
 
 	submitResponse() {
@@ -292,6 +326,19 @@ export default class Question extends React.Component {
 			this.props.model,
 			this.props.moduleData.navState.context
 		)
+	}
+
+	isShowingIDontKnow() {
+		const hasIDontKnow = this.props.model.modelState.dontKnowType === 'dontKnow'
+		// console.log("hasIDontKnow", hasIDontKnow)
+		// console.log("modelState.dontKnowType", this.props.model.modelState.dontKnowType)
+		// console.log("modelState",this.props.model.modelState)
+		// console.log("module data", this.props.moduleData)
+		// console.log("model", this.props.model)
+		console.log("response", this.getResponse())
+		// console.log("viewer props", this.props)
+		return hasIDontKnow
+
 	}
 
 	onClickShowExplanation(event) {
@@ -485,6 +532,7 @@ export default class Question extends React.Component {
 		const questionAssessmentModel = this.constructor.getQuestionAssessmentModel(questionModel)
 		const moduleData = this.props.moduleData
 		const type = questionModel.modelState.type
+		const dontKnowType = questionModel.modelState.dontKnowType
 		const score = this.getScore()
 		const mode = this.getMode()
 		const startQuestionAriaLabel = this.getStartQuestionAriaLabel()
@@ -500,6 +548,7 @@ export default class Question extends React.Component {
 				resultsRef={this.resultsRef}
 				assessmentComponentRef={this.assessmentComponentRef}
 				type={type}
+				dontKnowType={dontKnowType}
 				mode={mode}
 				viewState={this.getViewState()}
 				response={this.getResponse()}
@@ -510,6 +559,8 @@ export default class Question extends React.Component {
 				isAnswerRevealed={this.isAnswerRevealed()}
 				isShowingExplanation={this.isShowingExplanation()}
 				isShowingExplanationButton={this.isShowingExplanationButton()}
+				isShowingIDontKnow={this.isShowingIDontKnow()}
+				setDontKnowResponse={this.setDontKnowResponse()}
 				instructions={this.getInstructions()}
 				scoreClass={this.getScoreClass(score)}
 				feedbackText={this.getFeedbackText()}
@@ -536,6 +587,7 @@ export default class Question extends React.Component {
 		)
 		const mode = this.getMode()
 		const type = this.props.model.modelState.type
+		// const dontKnowType = this.props.modelState.dontKnowType
 
 		const className =
 			'obojobo-draft--chunks--question' +
