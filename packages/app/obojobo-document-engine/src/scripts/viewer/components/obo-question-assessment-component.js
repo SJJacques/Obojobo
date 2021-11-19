@@ -53,7 +53,8 @@ export default class OboQuestionAssessmentComponent extends React.Component {
 		return {
 			state: null,
 			targetId: null,
-			sendResponseImmediately: false
+			sendResponseImmediately: false,
+			isIdontKnow: false
 		}
 	}
 

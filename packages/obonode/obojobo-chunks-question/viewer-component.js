@@ -21,7 +21,6 @@ const FOCUS_TARGET_RESULTS = 'results'
 const FOCUS_TARGET_QUESTION = 'question'
 const FOCUS_TARGET_ANSWERS = 'answers'
 // const iDontKnowOverride = { dontKnowClicked: false }
-let currentResponse
 
 export default class Question extends React.Component {
 	constructor(props) {
@@ -92,9 +91,7 @@ export default class Question extends React.Component {
 			this.props.moduleData.navState.context
 		)
 
-		
 		const response = this.assessmentComponentRef.current.handleFormChange(event, prevResponse)	
-		currentResponse = response
 
 		// set default dontKnowClicked property on current question
 		if (response.state.dontKnow === null)
@@ -145,8 +142,29 @@ export default class Question extends React.Component {
 
 	setDontKnowResponse() {
 		// this.state.dontKnowClicked = !this.state.dontKnowClicked
-		// console.log("dontKnowClicked?", this.state.dontKnowClicked)
-		currentResponse.dontKnowClicked = !currentResponse.dontKnowClicked
+
+		const prevResponse = QuestionUtil.getResponse(
+			this.props.moduleData.questionState,
+			this.props.model,
+			this.props.moduleData.navState.context
+		)
+/*
+		if (this.assessmentComponentRef.current) {
+			const response = this.assessmentComponentRef.current.handleFormChange(event, prevResponse)
+			if (response.state.dontKnowClicked == null) {
+				response.state.dontKnowClicked = true
+			}
+			else {
+				response.state.dontKnowClicked = !response.state.dontKnowClicked
+			}
+		}
+// */
+		this.state.dontKnowClicked = !this.state.dontKnowClicked
+
+
+		console.log("dontKnowClicked?", this.state.dontKnowClicked)
+		// console.log("!dontKnowClicked?", !this.state.dontKnowClicked)
+		// currentResponse.dontKnowClicked = !currentResponse.dontKnowClicked
 	}
 
 	submitResponse() {
@@ -532,7 +550,7 @@ export default class Question extends React.Component {
 		const questionAssessmentModel = this.constructor.getQuestionAssessmentModel(questionModel)
 		const moduleData = this.props.moduleData
 		const type = questionModel.modelState.type
-		const dontKnowType = questionModel.modelState.dontKnowType
+		// const dontKnowType = questionModel.modelState.dontKnowType
 		const score = this.getScore()
 		const mode = this.getMode()
 		const startQuestionAriaLabel = this.getStartQuestionAriaLabel()
@@ -548,7 +566,7 @@ export default class Question extends React.Component {
 				resultsRef={this.resultsRef}
 				assessmentComponentRef={this.assessmentComponentRef}
 				type={type}
-				dontKnowType={dontKnowType}
+				// dontKnowType={dontKnowType}
 				mode={mode}
 				viewState={this.getViewState()}
 				response={this.getResponse()}
