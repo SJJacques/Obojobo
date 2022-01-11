@@ -17,6 +17,12 @@ const ASSESSMENT_NODE = 'ObojoboDraft.Sections.Assessment'
 const PAGE_NODE = 'ObojoboDraft.Pages.Page'
 const TEXT_NODE = 'ObojoboDraft.Chunks.Text'
 const TEXT_LINE_NODE = 'ObojoboDraft.Chunks.Text.TextLine'
+// an object used to basically get pointers to DOM elements
+// that wouldn't be accessible otherwise due to duplicate ids
+const nodeLists = {
+	selectTargets: document.getElementsByClassName("question-status"),
+	checkboxTargets: document.getElementsByClassName("survey-status")
+}
 
 class Question extends React.Component {
 	constructor(props) {
@@ -26,6 +32,8 @@ class Question extends React.Component {
 		this.onSetType = this.onSetType.bind(this)
 		this.onSetAssessmentType = this.onSetAssessmentType.bind(this)
 		this.isInAssessment = this.getIsInAssessment()
+		this.updateNodeLists = this.updateNodeLists.bind(this)
+		this.setAllTypes = this.setAllTypes.bind(this)
 	}
 
 	getIsInAssessment() {
@@ -39,8 +47,21 @@ class Question extends React.Component {
 		})
 	}
 
-	onSetType(event) {
-		const type = event.target.checked ? 'survey' : 'default'
+	onSetType(event, itemIndex) {
+		this.updateNodeLists()
+		let type = 'default'
+		// const arr = nodeLists.selectTargets
+		// console.log("arr", arr)
+		if (event != undefined) {
+			type = event.target.checked ? 'survey' : 'default'
+			itemIndex = event.target.getAttribute('questionNumber') - 1
+		}
+		else {
+			type = nodeLists.checkboxTargets.item(itemIndex).checked ? 'survey' : 'default'
+		}
+		
+		// console.log("current 'item' object", nodeLists.checkboxTargets.item(itemIndex))
+		// console.log("checked boolean value", nodeLists.checkboxTargets.item(itemIndex).checked)
 
 		// update this element's content.type
 		const path = ReactEditor.findPath(this.props.editor, this.props.element)
@@ -61,6 +82,16 @@ class Question extends React.Component {
 		)
 	}
 
+	setAllTypes() {
+		this.updateNodeLists()
+		let i = 0
+		for (i; i < nodeLists.selectTargets.length; i++)
+		{
+			this.onSetType(undefined, i)
+		}
+	}
+
+
 	getHasSolution() {
 		return (
 			this.props.element.children[this.props.element.children.length - 1].subtype === SOLUTION_NODE
@@ -69,7 +100,9 @@ class Question extends React.Component {
 
 	onSetAssessmentType(event) {
 		const type = event.target.value
+		this.updateNodeLists()
 
+		const questionNumber = event.target.getAttribute('questionNumber')
 		const item = Common.Registry.getItemForType(type)
 		const newBlock = item.cloneBlankNode()
 
@@ -89,11 +122,35 @@ class Question extends React.Component {
 				at: path.concat(assessmentLocation)
 			})
 		})
+
+		// match this notelist item to the corresponding checkbox target and pass it into onsettype
+		// iterate over the lists when adding and deleting so that the numbers are correct
+		// this.onSetType(questionNumber - 1)
+		this.setAllTypes()
+	}
+
+	// retrieve current lists of the select and checkbox DOM elements
+	updateNodeLists()
+	{
+		let i = 1
+		nodeLists.selectTargets = document.getElementsByClassName("question-status")
+		nodeLists.checkboxTargets = document.getElementsByClassName("survey-status")
+
+		for (i; i <= nodeLists.selectTargets.length; i++) {
+			nodeLists.selectTargets.item(i - 1).setAttribute('questionNumber', i)
+			nodeLists.checkboxTargets.item(i - 1).setAttribute('questionNumber', i)
+		}
+
+		// console.log("select targets", nodeLists.selectTargets)
+		// console.log("checkbox targets", nodeLists.checkboxTargets)
 	}
 
 	delete() {
 		const path = ReactEditor.findPath(this.props.editor, this.props.element)
-		return Transforms.removeNodes(this.props.editor, { at: path })
+
+		Transforms.removeNodes(this.props.editor, { at: path })
+
+		return this.updateNodeLists()
 	}
 
 	addSolution() {
@@ -192,12 +249,14 @@ class Question extends React.Component {
 									contentEditable={false}
 									value={questionType}
 									onChange={this.onSetAssessmentType}
+									className="question-status"
+									questionNumber=''
 								>
 									<option value={MCASSESSMENT_NODE}>Multiple choice</option>
 									<option value={NUMERIC_ASSESSMENT_NODE}>Input a number</option>
 								</select>
 								<label className="question-type" contentEditable={false}>
-									<input type="checkbox" checked={isTypeSurvey} onChange={this.onSetType} />
+									<input type="checkbox" className="survey-status" questionNumber='' checked={isTypeSurvey} onChange={this.onSetType} />
 									Survey Only
 								</label>
 							</div>
